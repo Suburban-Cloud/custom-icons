@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Icon Gallery</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f9f9f9;
+        padding: 2rem;
+        margin: 0;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .search-container input {
+        width: 100%;
+        max-width: 400px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .icon-box {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        position: relative;
+        transition: transform 0.2s;
+      }
+
+      .icon-box:hover {
+        transform: translateY(-3px);
+      }
+
+      .icon-box img {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 0.5rem;
+      }
+
+      .label {
+        font-size: 0.75rem;
+        color: #333;
+        word-break: break-word;
+      }
+
+      .actions {
+        margin-top: 0.5rem;
+        display: none;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .icon-box:hover .actions {
+        display: flex;
+      }
+
+      .btn {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        transition: background-color 0.2s;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #323232;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      .toast.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Icon Gallery</h1>
+
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search icons..."
+        oninput="filterIcons()"
+      />
+    </div>
+
+    <div class="grid" id="iconGrid"></div>
+    <div id="toast" class="toast"></div>
+
+    <script>
+      const icons = [
+        "business-internet.svg",
+        "business-voice.svg",
+        "business-wifi.svg",
+        "call-us.svg",
+        "chat-us.svg",
+        "cloud-services.svg",
+        "connectivity.svg",
+        "data-center.svg",
+        "infrastructure-service.svg",
+        "multimedia-content.svg",
+      ];
+
+      const username = "Suburban-Cloud";
+      const repo = "custom-icons";
+      const path = "icons";
+
+      const grid = document.getElementById("iconGrid");
+      const toast = document.getElementById("toast");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => toast.classList.remove("show"), 2000);
+      }
+
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("CDN URL copied!");
+        });
+      }
+
+      function renderIcons(filter = "") {
+        grid.innerHTML = "";
+        icons
+          .filter((icon) => icon.toLowerCase().includes(filter.toLowerCase()))
+          .forEach((icon) => {
+            const url = `https://cdn.jsdelivr.net/gh/${username}/${repo}/${path}/${icon}`;
+
+            const box = document.createElement("div");
+            box.className = "icon-box";
+
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = icon;
+            img.title = icon;
+
+            const label = document.createElement("div");
+            label.className = "label";
+            label.textContent = icon;
+
+            const actions = document.createElement("div");
+            actions.className = "actions";
+
+            const copyBtn = document.createElement("button");
+            copyBtn.className = "btn";
+            copyBtn.textContent = "Copy CDN";
+            copyBtn.onclick = () => copyToClipboard(url);
+
+            const downloadBtn = document.createElement("button");
+            downloadBtn.className = "btn";
+            downloadBtn.textContent = "Download";
+            downloadBtn.onclick = async () => {
+              try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = icon;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(blobUrl);
+              } catch (error) {
+                showToast("Download failed!");
+                console.error("Download error:", error);
+              }
+            };
+
+            actions.appendChild(copyBtn);
+            actions.appendChild(downloadBtn);
+
+            box.appendChild(img);
+            box.appendChild(label);
+            box.appendChild(actions);
+            grid.appendChild(box);
+          });
+      }
+
+      function filterIcons() {
+        const query = document.getElementById("searchInput").value;
+        renderIcons(query);
+      }
+
+      renderIcons();
+    </script>
+  </body>
+</html>
