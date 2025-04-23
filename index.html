@@ -3,102 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Icon Gallery</title>
+    <title>Suburban Icon Gallery</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.cdnfonts.com/css/graphik-trial"
+      rel="stylesheet"
+    />
     <style>
-      body {
-        font-family: sans-serif;
-        background: #f9f9f9;
-        padding: 2rem;
-        margin: 0;
+      html, body {
+        font-family: 'Graphik Trial', sans-serif;
       }
-
-      h1 {
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-
-      .search-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem;
-      }
-
-      .search-container input {
-        width: 100%;
-        max-width: 400px;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 2rem;
-        align-items: center;
-      }
-
-      .icon-box {
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 1rem;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        position: relative;
-        transition: transform 0.2s;
-      }
-
-      .icon-box:hover {
-        transform: translateY(-3px);
-      }
-
-      .icon-box img {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 0.5rem;
-      }
-
-      .label {
-        font-size: 0.75rem;
-        color: #333;
-        word-break: break-word;
-      }
-
-      .actions {
-        margin-top: 0.5rem;
-        display: none;
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-
-      .icon-box:hover .actions {
-        display: flex;
-      }
-
-      .btn {
-        font-size: 0.7rem;
-        padding: 4px 8px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        background-color: #007bff;
-        color: white;
-        transition: background-color 0.2s;
-        text-decoration: none;
-      }
-
-      .btn:hover {
-        background-color: #0056b3;
-      }
-
       .toast {
         position: fixed;
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
-        background: #323232;
+        background: rgb(152, 50, 241);
+        background: linear-gradient(120deg, rgba(152, 50, 241, 1) 24%, rgba(157, 184, 252, 1) 100%);
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 5px;
@@ -107,27 +29,142 @@
         z-index: 1000;
         pointer-events: none;
       }
-
       .toast.show {
         opacity: 1;
       }
+
+      .bg-gray-50 {
+    background-color: rgb(251 245 237)!important;
+}
+.faint-red {
+    background: rgb(255, 250, 255);
+    background: linear-gradient(120deg, rgba(255, 250, 255, 1) 24%, rgba(255, 196, 193, 1) 100%);
+}
+.faint-red-dark {
+    background: rgb(255, 0, 33);
+    background: linear-gradient(63deg, rgba(255, 0, 33, 1) 24%, rgba(255, 196, 193, 1) 100%);
+}
+.faint-sky-blue {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(120deg, rgba(255, 255, 255, 1) 24%, rgba(149, 239, 253, 1) 100%);
+}
+.faint-sky-blue-dark {
+    background: rgb(99, 185, 255);
+    background: linear-gradient(120deg, rgba(99, 185, 255, 1) 24%, rgba(149, 239, 253, 1) 100%);
+}
+.faint-purple {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(120deg, rgba(255, 255, 255, 1) 24%, rgba(157, 184, 252, 1) 100%);
+}
+.faint-purple-dark {
+    background: rgb(152, 50, 241);
+    background: linear-gradient(120deg, rgba(152, 50, 241, 1) 24%, rgba(157, 184, 252, 1) 100%);
+}
+.faint-yellow {
+    background: rgb(255, 253, 152);
+    background: linear-gradient(330deg, rgba(255, 253, 152, 1) 24%, rgba(255, 255, 255, 1) 100%);
+}
+.faint-yellow-dark {
+    background: rgb(255, 236, 79);
+    background: linear-gradient(120deg, rgba(255, 236, 79, 1) 24%, rgba(255, 253, 148, 1) 100%);
+}
+.faint-light-grey {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(120deg, rgba(255, 255, 255, 1) 24%, rgba(186, 213, 238, 1) 100%);
+}
+.brand-red-text {
+    color: #ff0027;
+}
+.brand-white-text {
+    color: #B8C7E0;
+}
+.brand-sky-text {
+    color: #63b9ff;
+}
+.brand-purple-text {
+    color: #9934f1;
+}
+ 
     </style>
   </head>
-  <body>
-    <h1>Icon Gallery</h1>
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="border-b">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <img src="logo.svg" alt="Logo" class="h-[4rem] w-[10rem]" />
+          <div class="relative inline-block"></div>
+        </div>
+        <a href="#" class="flex items-center text-sm text-blue-500 hover:underline">
+          <button class="flex items-center space-x-1 text-sm text-gray-600 hover:text-gray-800 focus:outline-none">
+            <span>1.0</span>
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </a>
+      </div>
+    </header>
 
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search icons..."
-        oninput="filterIcons()"
-      />
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 py-8 flex flex-col lg:flex-row items-center justify-between">
+      <div class="lg:w-1/2">
+        <h1 class="text-4xl font-normal text-gray-900 mb-6">
+          Explore <b class="brand-red-text">Suburban's</b> curated icon library. Pixel‑Perfect <b>icons</b> for every Project.
+        </h1>
+        <div class="flex space-x-4">
+          <a href="#" class="inline-flex items-center px-4 py-5 faint-red-dark text-black hover:faint-yellow rounded-full font-bold">
+            Icon Sheet
+          </a>
+          <a href="#" class="inline-flex items-center px-4 py-2 faint-sky-blue-dark rounded-lg text-black hover:faint-purple-dark font-bold">
+            Color Guide
+          </a>
+        </div>
+      </div>
+      <div class="mt-8 lg:mt-0 lg:w-1/2 flex justify-center">
+        <div class="w-[27rem] h-[23rem]  flex items-center justify-center">
+         <img src="bg.PNG" alt="Hero Image"  />
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filters -->
+    <div class=" border-t border-b">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between">
+        <div class="flex space-x-4">
+          <button class="px-3 py-1 rounded-lg faint-red-dark text-black">Outline</button>
+          <button class="px-3 py-1 rounded-lg text-gray-600 hover:bg-gray-50">Solid</button>
+          <button class="px-3 py-1 rounded-lg text-gray-600 hover:bg-gray-50">Mini</button>
+          <button class="px-3 py-1 rounded-lg text-gray-600 hover:bg-gray-50">Micro</button>
+        </div>
+        <div class="mt-4 sm:mt-0 flex items-center space-x-2">
+          <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35" />
+          </svg>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search icons..."
+            oninput="filterIcons()"
+            class="w-full max-w-md px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+ 
     </div>
 
-    <div class="grid" id="iconGrid"></div>
+    <!-- Icon Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+      <div
+        id="iconGrid"
+        class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+      ></div>
+    </main>
+
+    <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
+    <!-- Filtering & Rendering Script -->
     <script>
       const icons = [
         "business-internet.svg",
@@ -165,32 +202,36 @@
       function renderIcons(filter = "") {
         grid.innerHTML = "";
         icons
-          .filter((icon) => icon.toLowerCase().includes(filter.toLowerCase()))
+          .filter((icon) =>
+            icon.toLowerCase().includes(filter.toLowerCase())
+          )
           .forEach((icon) => {
             const url = `https://cdn.jsdelivr.net/gh/${username}/${repo}/${path}/${icon}`;
 
             const box = document.createElement("div");
-            box.className = "icon-box";
+            box.className = "group p-4 bg-white border border-gray-200 rounded-lg shadow hover:shadow-lg transition-transform transform hover:-translate-y-1 relative";
 
             const img = document.createElement("img");
             img.src = url;
             img.alt = icon;
             img.title = icon;
+            img.className = "w-12 h-12 mb-2 mx-auto cursor-pointer";
+            img.onclick = () => copyToClipboard(url);
 
             const label = document.createElement("div");
-            label.className = "label";
+            label.className = "text-xs text-gray-700 break-words text-center";
             label.textContent = icon;
 
             const actions = document.createElement("div");
-            actions.className = "actions";
+            actions.className = "mt-2 flex flex-col space-y-1 hidden group-hover:flex absolute bottom-4 left-1/2 transform -translate-x-1/2";
 
             const copyBtn = document.createElement("button");
-            copyBtn.className = "btn";
+            copyBtn.className = "text-xs px-2 py-1 bg-[#ff0027] text-white rounded";
             copyBtn.textContent = "Copy CDN";
             copyBtn.onclick = () => copyToClipboard(url);
 
             const downloadBtn = document.createElement("button");
-            downloadBtn.className = "btn";
+            downloadBtn.className = "text-xs px-2 py-1 bg-[#9934f1] text-white rounded";
             downloadBtn.textContent = "Download";
             downloadBtn.onclick = async () => {
               try {
@@ -226,7 +267,7 @@
         renderIcons(query);
       }
 
-      renderIcons();
+      document.addEventListener("DOMContentLoaded", () => renderIcons());
     </script>
   </body>
 </html>
